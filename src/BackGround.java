@@ -1,31 +1,46 @@
 public class BackGround {
-    String login;
-    String password;
-    String confirmPassword;
+    private String login;
+    private String password;
+    private String confirmPassword;
 
     public BackGround(String login, String password, String confirmPassword) {
         this.login = login;
         this.password = password;
         this.confirmPassword = confirmPassword;
     }
-    public Boolean checkPassword(String password, String confirmPassword) {
-        if (this.password.equals(this.confirmPassword)) {
+
+    public static Boolean checkPassword(String password, String confirmPassword) {
+        if (password.equals(confirmPassword)) {
             return true;
         } else {
             return false;
         }
     }
-    public Boolean checkBackground (String s){
-        if (s == null||s.length()>20||s.isEmpty()){
+
+    public static Boolean checkString(String s) {
+        if (s == null || s.length() > 20 || s.isEmpty()) {
             return false;
         }
-        String s1=s.replaceAll("[^a-zA-Z0-9_]","");
-        if (s.equals(s1)){
+        String s1 = s.replaceAll("[^a-zA-Z0-9_]", "");
+        if (s.equals(s1)) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
+
+    public static void checkBackground(String login, String password, String confirmPassword) throws WrongPasswordException, WrongLoginException {
+        if (!checkString(login)) {
+            throw new WrongLoginException("Логин не верный!");
+        }
+        if (!checkString(password)) {
+            throw new WrongPasswordException("Пароль не верный!");
+        }
+        if (!checkPassword(password, confirmPassword)) {
+            throw new WrongPasswordException("Подтверждение пароля не совпадает!");
+        }
+    }
+
     public String getLogin() {
         return login;
     }
