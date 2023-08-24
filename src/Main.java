@@ -1,4 +1,4 @@
-public class main {
+public class Main {
     public static void main(String[] args) throws WrongLoginException, WrongPasswordException {
         BackGround backGround = new BackGround("master", "qwerty", "qwerty");
         BackGround backGround2 = new BackGround("vas9I_", "qwerty1", "qwerty3");
@@ -12,6 +12,8 @@ public class main {
         }catch (WrongPasswordException | WrongLoginException e ){
             throw new RuntimeException(e);
 
+        }finally {
+            System.out.println("работа программы выполнена");
         }
     }
 }
